@@ -1,5 +1,4 @@
 library(shiny)
-library(shinydashboard)
 library(shinyauth)
 
 # # The following line must have been run:

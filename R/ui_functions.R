@@ -22,7 +22,30 @@ page_tile = function(title, text = NULL, main = TRUE){
     ))
 }
 
-body = function(...) {
+#' Deffine the ui for the sidebar of the shiny app using shinyauth
+#'
+#' @param ... Passed to shinydashboard::dashboardSidebar
+#'
+#' @export
+saSidebar = function(...) {
+
+  shinydashboard::dashboardSidebar(
+
+    # Users ui
+    ...,
+
+    # Requiered for shinyauth
+    shiny::uiOutput("auth_sidebar")
+  )
+
+}
+
+#' Deffine the ui for the body of the shiny app using shinyauth
+#'
+#' @param ... Passed to shinydashboard::dashboardBody
+#'
+#' @export
+saBody = function(...) {
   shinydashboard::dashboardBody(
 
     # Requiered for shinyauth
@@ -33,10 +56,8 @@ body = function(...) {
 
     shiny::uiOutput("auth_body"),
 
-
-    ### Your body Start ###
+    # Users ui
     ...
-    ### Your body End ###
 
   )
 }
