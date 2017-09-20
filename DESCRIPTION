@@ -1,11 +1,21 @@
 Package: shinyauth
-Type: Package
-Title: What the Package Does (Title Case)
-Version: 0.1.0
-Author: Who wrote it
-Maintainer: The package maintainer <yourself@somewhere.net>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
-License: What license is it under?
+Title: shinyauth adds simple authentication to a shiny app, via a MySQL db
+    table of users
+Version: 0.1
+Authors@R: person("Tim", "Jones", email = "timothy.jones1@amey.co.uk", role = c("aut", "cre"))
+Description: This package adds authentication, and simple user management tools to a Shinydashboard. It requires a MySQL with a schema in which a users table can be placed.
+Depends:
+    R (>= 3.3.3)
+License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
+Imports:
+    bcrypt (>= 0.2),
+    data.table (>= 1.10.4),
+    DBI (>= 0.5-1),
+    magrittr (>= 1.5),
+    shiny (>= 1.0.1),
+    shinydashboard (>= 0.5.3),
+    sodium (>= 1.1),
+    pool (>= 0.1.0)
+RoxygenNote: 6.0.1
