@@ -143,29 +143,31 @@ create_user_modal = function(input, output, session, time_stamp){
     ),
 
     # Body of Modal Window
-    shiny::fluidRow(
-      shiny::textInput(
-        inputId = "user_id",
-        label   = "User ID",
-        value   = "",
-        width   = "100%"),
-      shiny::textInput(
-        inputId = "password",
-        label   = "Password",
-        value   = defult_password,
-        width   = "100%"),
-      shiny::checkboxInput(
-        inputId = "make_admin",
-        label   = "Make User Admin",
-        value   = FALSE,
-        width   = "100%"),
-      shiny::checkboxInput(
-        inputId = "user_creation_confirm",
-        label   = "Confirm User Creation",
-        value   = FALSE,
-        width   = "100%")
+    shiny::fluidPage(
+      shiny::fluidRow(
+        shiny::textInput(
+          inputId = "user_id",
+          label   = "User ID",
+          value   = "",
+          width   = "100%"),
+        shiny::textInput(
+          inputId = "password",
+          label   = "Password",
+          value   = defult_password,
+          width   = "100%"),
+        shiny::checkboxInput(
+          inputId = "make_admin",
+          label   = "Make User Admin",
+          value   = FALSE,
+          width   = "100%"),
+        shiny::checkboxInput(
+          inputId = "user_creation_confirm",
+          label   = "Confirm User Creation",
+          value   = FALSE,
+          width   = "100%")
       )
     )
+  )
 
 }
 
