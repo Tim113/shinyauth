@@ -193,10 +193,10 @@ create_auth_tables = function(auth_config_path) {
   #################### Make first user ##########
   ### Get the user cration defults
   # Return a named list of user defults
-  ls_defaults = list_defults(auth)
+  ls_defaults = list_defults(auth_config)
 
   # All users defult to not being moderators if moderators exist
-  if (auth$table_cofig$moderator$use_moderatior) {
+  if (auth_config$table_cofig$moderator$use_moderatior) {
     sql_create_user = paste0(
       "INSERT INTO Users ",
       " ( user_id, password, admin, moderator, date_created, last_password_change, change_password, " ,

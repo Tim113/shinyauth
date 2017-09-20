@@ -58,4 +58,4 @@ server_post_auth = function(input, output, session, auth) {
 ### Call the sheppey auth server
 shinyauth::auth_server(
   server      = server_post_auth,
-  config_path = "~/.auth_example.yaml")
+  config_path = "./auth_conf.yaml")
