@@ -47,7 +47,7 @@ auth_sidebar = function(input, output, session, status){
     ## Render the Sidbar Meneu
     output$auth_sidebar = shiny::renderUI({
       # The inital sidebar menue
-      sidebarMenu(
+      shinydashboard::sidebarMenu(
         ### Login to the app
         shiny::textInput(
           inputId = "user",

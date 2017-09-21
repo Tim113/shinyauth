@@ -2,7 +2,7 @@ library(shiny)
 library(shinyauth)
 
 # # The following line must have been run:
-# shinyauth::create_auth_tables(auth_config_path = "~/.auth_example.yaml")
+# shinyauth::create_auth_tables(auth_config_path = "./auth_example.yaml")
 
 ### Server funciton to run when the user is logged in
 server_post_auth = function(input, output, session, auth) {
@@ -55,7 +55,7 @@ server_post_auth = function(input, output, session, auth) {
 
 }
 
-### Call the sheppey auth server
+### Call the auth server
 shinyauth::auth_server(
   server      = server_post_auth,
   config_path = "./auth_conf.yaml")
