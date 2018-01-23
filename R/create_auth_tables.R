@@ -34,7 +34,7 @@ create_auth_tables = function(auth_config_path) {
       !("users_moderator" %in% names(auth_config$table_cofig))) {
     stop("use_moderatior: TRUE but there is no users_moderator in the config file")
   } else if (!auth_config$table_cofig$moderator$use_moderatior &
-              "users_moderator" %in% names(auth_config$table_cofig)) {
+             "users_moderator" %in% names(auth_config$table_cofig)) {
     stop("use_moderatior: FALSE but there is a users_moderator in the config file.  ",
          "You have probably made a mistake.")
   }
@@ -118,7 +118,7 @@ create_auth_tables = function(auth_config_path) {
   # Find all of the addional columns that the user has created
   additonal_columns =
     names(auth_config$table_cofig)[!(names(auth_config$table_cofig) %in%
-                                         c(required_columns, "users_moderator"))]
+                                       c(required_columns, "users_moderator"))]
 
 
   # Now we have a list of all of the additonal columns we must add each of them in tern
@@ -196,26 +196,37 @@ create_auth_tables = function(auth_config_path) {
   ls_defaults = list_defults(auth_config)
 
   # All users defult to not being moderators if moderators exist
-  if (auth_config$table_cofig$moderator$use_moderatior) {
-    sql_create_user = paste0(
-      "INSERT INTO Users ",
-      " ( user_id, password, admin, moderator, date_created, last_password_change, change_password, " ,
-      paste0(names(ls_defaults), collapse = ", "),
-      ") ",
-      " VALUES ( ?user_id, ?password, '1', '0', NOW(), NOW(), '1',  ",
-      paste0("?", names(ls_defaults), collapse = ", "),
-      " );")
+  sql_create_user = paste0(
+    "INSERT INTO Users ",
+    " ( user_id, password, admin, date_created, last_password_change, change_password" ,
 
-  } else {
-    sql_create_user = paste0(
-      "INSERT INTO Users ",
-      " ( user_id, password, admin, date_created, last_password_change, change_password, " ,
-      paste0(names(ls_defaults), collapse = ", "),
-      ") ",
-      " VALUES ( ?user_id, ?password, '1', NOW(), NOW(), '1',  ",
-      paste0("?", names(ls_defaults), collapse = ", "),
-      " );")
-  }
+    if (auth_config$table_cofig$moderator$use_moderatior) {
+      ", moderator"
+    },
+
+    # Only add in defult values if the schema includes them
+    if (length(ls_defaults) != 0) {
+      paste0(
+        ", ",
+        paste0( names(ls_defaults), collapse = ", ")
+      )
+    },
+    " ) ",
+    " VALUES ( ?user_id, ?password, '1', NOW(), NOW(), '1'",
+
+    if (auth_config$table_cofig$moderator$use_moderatior) {
+      ", '0'"
+    },
+
+    # Only add in defult values if the schema includes them
+    if (length(ls_defaults) != 0) {
+      paste0(
+        ", ",
+        paste0(" ?", names(ls_defaults), collapse = ", ")
+      )
+    },
+    " );")
+
 
   query_create_user = do.call(
     DBI::sqlInterpolate,
