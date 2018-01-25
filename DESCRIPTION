@@ -10,7 +10,6 @@ License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Imports:
-    bcrypt (>= 0.2),
     data.table (>= 1.10.4),
     DBI (>= 0.5-1),
     magrittr (>= 1.5),
