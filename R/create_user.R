@@ -125,8 +125,7 @@ save_new_user = function(input, output, session, auth) {
 create_user_modal = function(input, output, session, time_stamp){
 
   # Gen defult password for user
-  defult_password = bcrypt::gensalt() %>%
-    substr(start = 8, stop = 18)
+  defult_password = generate_random_password()
 
   #  The user to change the password is the active user
   shiny::modalDialog(
