@@ -241,8 +241,7 @@ password_change_modal = function(input, output, session,
     )
   } else {
 
-    reset_password = bcrypt::gensalt() %>%
-      substr(start = 8, stop = 18)
+    reset_password = generate_random_password()
 
 
     # The user to change password for is not the active user
@@ -310,3 +309,20 @@ password_change_required = function(auth) {
   }
 }
 
+#' Generate a random integer using sodium 
+#'
+get_random_int = function(){
+      packBits(rawToBits(sodium::random(4)), type = "integer")
+}
+
+#' Generate a random character using sodium 
+#'
+get_random_char = function(){
+      c(0:9, letters, LETTERS)[ (get_random_int() %% 62) + 1 ]
+}
+
+#' Generate a random password using sodium 
+#'
+generate_random_password = function(n=1, lenght=11){
+      paste( sapply(1:lenght, function(x)get_random_char()), collapse =  "")
+}
